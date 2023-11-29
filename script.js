@@ -10,16 +10,15 @@ let reStartBtn =  document.querySelector("#restart");
 
 var quizArray = [
     {
-    prompt: `How do you call a 
-             function named  
-             myFunction?`, 
+    prompt: 
+    'What does HTML stands for?',
     options: [ 
-        "call myFunction()", 
-        "myFunction()", 
-        "call function myFunction", 
-        "Call.myFunction", 
+        "HyperText Markup Language", 
+        "HyperText Machine Language", 
+        "HyperText Marking Language", 
+        "HighText Marking Language", 
     ], 
-    answer: "myFunction()", 
+    answer: "HyperText Markup Language", 
 }, 
 
 { 
@@ -43,18 +42,13 @@ var quizArray = [
 }, 
 
 { 
-    prompt: `A named element in a  
-             JavaScript program that 
-             is used to store and  
-             retrieve data is a _____.`, 
+    prompt: 'Inside which HTML element do we put the JavaScript?', 
     options: [ 
-        "method", 
-        "assignment operator", 
-        "letiable", 
-        "string", 
+        "<js>", 
+        "<script>", 
+        "<javascript>", 
+        "<scripting>", 
     ], 
-    answer: "letiable", 
+    answer: "<script>  ", 
 }, 
 ]; 
-
-  
