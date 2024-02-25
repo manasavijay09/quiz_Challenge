@@ -8,8 +8,12 @@ var nameEl = document.querySelector("#name");
 var feedbackEl = document.querySelector("#feedback");
 let reStartBtn = document.querySelector("#restart");
 let questionWordsEl = document.getElementById("question-words")
-let choicesListEl = document.querySelectorAll(".choices")
-
+let choicesListEl = document.querySelectorAll(".choices");
+let answerEl=document.getElementById("check-answer");
+let quizendEl=document.querySelector("#quiz-end");
+for(let i=0;i<choicesListEl.length;i++){
+    choicesListEl[i].addEventListener("click",checkAnswer)
+}
 var quizArray = [
     {
         prompt:
@@ -54,12 +58,25 @@ var quizArray = [
         answer: "<script>  ",
     },
 ]; 
-var currentQuestion=0
+var currentQuestion=0;
+var score=0;
+var timercount = quizArray.length*5;
+var timerobject;
+
 
 startBtn.addEventListener("click",function(){
     questionsEl.classList.remove("hide")
     document.getElementById("quiz-start").classList.add("hide")
     displayQuestion()
+    timerobject=setInterval(function(){
+        timerEl.textContent=timercount;
+        if(timercount<=0){
+           timerEl.textContent="Time Up";
+           endquiz();
+        }
+        timercount--;
+    },1000)
+    
 })
 
 function displayQuestion(){
@@ -68,3 +85,30 @@ function displayQuestion(){
         choicesListEl[i].textContent = quizArray[currentQuestion].options[i]
     }
 }
+
+function checkAnswer(event){
+    console.log(event.target.textContent)
+   var userchoices= event.target.textContent
+   if(userchoices==quizArray[currentQuestion].answer){
+    score += 5
+    answerEl.textContent="Correct Answer"
+   }else{
+    answerEl.textContent="Wrong Answer"
+    timercount-=5;
+   }
+   if(currentQuestion < quizArray.length-1){
+    currentQuestion++
+    displayQuestion()
+   }else{
+    endquiz();
+   }
+};
+function endquiz() {
+    clearInterval(timerobject);
+    questionsEl.classList.add("hide");
+    quizendEl.classList.remove("hide");
+
+};
+
+
+    
