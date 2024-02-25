@@ -11,6 +11,7 @@ let questionWordsEl = document.getElementById("question-words")
 let choicesListEl = document.querySelectorAll(".choices");
 let answerEl=document.getElementById("check-answer");
 let quizendEl=document.querySelector("#quiz-end");
+let scoreEl=document.getElementById("score");
 for(let i=0;i<choicesListEl.length;i++){
     choicesListEl[i].addEventListener("click",checkAnswer)
 }
@@ -92,9 +93,11 @@ function checkAnswer(event){
    if(userchoices==quizArray[currentQuestion].answer){
     score += 5
     answerEl.textContent="Correct Answer"
+    scoreEl.textContent=score;
    }else{
     answerEl.textContent="Wrong Answer"
     timercount-=5;
+    timerEl.textContent=timercount;
    }
    if(currentQuestion < quizArray.length-1){
     currentQuestion++
@@ -107,8 +110,21 @@ function endquiz() {
     clearInterval(timerobject);
     questionsEl.classList.add("hide");
     quizendEl.classList.remove("hide");
-
+    timerEl.textContent=timercount;
+    scoreEl.textContent=score;
+     document.getElementById("score-final").innerText="Your Final Score is:"+(timercount+score);
 };
 
-
+document.getElementById("submit-score").addEventListener("click",function(event){
+    event.preventDefault();
+    var username=document.getElementById("name").value;
+    console.log(username);
+    var previousdashboard=JSON.parse(localStorage.getItem("codequiz")) || []
+    previousdashboard.push({
+        user:username,finalscore:(timercount+score)
+    })
+    localStorage.setItem("codequiz",JSON.stringify(previousdashboard));
+    document.getElementById("feedback").classList.remove("hide");
+    quizendEl.classList.add("hide");
+})
     
