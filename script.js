@@ -127,4 +127,7 @@ document.getElementById("submit-score").addEventListener("click",function(event)
     document.getElementById("feedback").classList.remove("hide");
     quizendEl.classList.add("hide");
 })
+document.getElementById("restart").addEventListener("click",function(event){
+    location.reload();
+})
     
